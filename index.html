@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Carneiro Seguros — Seguro auto, planos de saúde, consórcios e energia solar. Cotação rápida pelo WhatsApp com atendimento personalizado em Pernambuco.">
+  <meta name="keywords" content="seguro auto, plano de saúde, consórcio, energia solar, Carneiro Seguros, corretora de seguros, Pernambuco">
+  <title>Carneiro Seguros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="imgs/logo.png" type="image/png">
+</head>
+<body>
+
+  <!-- Header fixo -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="header__logo">
+        <img src="imgs/logo.png" alt="Logo Carneiro Seguros" width="40" height="40">
+        <span>Carneiro Seguros</span>
+      </a>
+
+      <button class="header__toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="header__nav" id="mainNav" aria-label="Navegação principal">
+        <ul class="header__menu">
+          <li><a href="#inicio" class="header__link">Início</a></li>
+          <li><a href="#servicos" class="header__link">Serviços</a></li>
+          <li><a href="#contato" class="header__link">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+      <div class="hero__overlay"></div>
+      <div class="container hero__content">
+        <h1 class="hero__title">
+          Contrate seu seguro em minutos, direto do <span class="hero__highlight">WhatsApp</span>
+        </h1>
+        <a href="#servicos" class="btn btn--primary btn--lg">Quero meu Seguro</a>
+      </div>
+    </section>
+
+    <!-- Abas de serviços -->
+    <section class="services" id="servicos">
+      <div class="container">
+        <h2 class="services__title">Serviços</h2>
+        <div class="services__tabs" role="tablist" aria-label="Selecione um serviço">
+          <button class="services__tab is-active" role="tab" data-service="auto" aria-selected="true" aria-controls="panel-auto">
+            Seguro Automotivo
+          </button>
+          <button class="services__tab" role="tab" data-service="consorcio" aria-selected="false" aria-controls="panel-consorcio">
+            Consórcios
+          </button>
+          <button class="services__tab" role="tab" data-service="saude" aria-selected="false" aria-controls="panel-saude">
+            Plano de saúde
+          </button>
+          <button class="services__tab" role="tab" data-service="solar" aria-selected="false" aria-controls="panel-solar">
+            Energia solar
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Painel: Seguro Automotivo -->
+    <section class="service-panel is-active" id="panel-auto" data-service="auto" role="tabpanel">
+      <div class="service-panel__layout">
+        <img class="service-panel__image" src="imgs/img-carro.png" alt="Seguro automotivo — veículo protegido">
+        <div class="service-panel__content">
+          <h3 class="service-panel__title">Seguro Automotivo</h3>
+          <p class="service-panel__text">
+            Contratar esse tipo de seguro é investir na sua tranquilidade e no seu patrimônio.
+            Com atendimento personalizado e condições acessíveis, a Carneiro Seguros está pronta
+            para oferecer o melhor plano para o seu perfil.
+          </p>
+          <button type="button" class="btn btn--primary btn--open-form" data-form="auto">Adquira já</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Painel: Consórcios -->
+    <section class="service-panel" id="panel-consorcio" data-service="consorcio" role="tabpanel" hidden>
+      <div class="service-panel__layout">
+        <img class="service-panel__image" src="imgs/img-consorcio.png" alt="Consórcio — entrega de chaves">
+        <div class="service-panel__content">
+          <h3 class="service-panel__title">Consórcios</h3>
+          <p class="service-panel__text">
+            Participar de um consórcio é uma forma inteligente de conquistar seus objetivos sem juros
+            e com planejamento. Com orientação especializada e opções flexíveis, a Carneiro Seguros
+            ajuda você a encontrar o consórcio ideal para adquirir seu bem com segurança e tranquilidade.
+          </p>
+          <button type="button" class="btn btn--primary btn--open-form" data-form="consorcio">Adquira já</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Painel: Plano de Saúde -->
+    <section class="service-panel" id="panel-saude" data-service="saude" role="tabpanel" hidden>
+      <div class="service-panel__layout">
+        <img class="service-panel__image" src="imgs/img-planodesaude.png" alt="Plano de saúde — cuidado médico">
+        <div class="service-panel__content">
+          <h3 class="service-panel__title">Plano de Saúde</h3>
+          <p class="service-panel__text">
+            Cuidar da sua saúde e de quem você ama é essencial. Com planos acessíveis, ampla cobertura
+            e atendimento personalizado, a Carneiro Seguros oferece soluções em saúde que garantem mais
+            proteção, bem-estar e tranquilidade no seu dia a dia.
+          </p>
+          <button type="button" class="btn btn--primary btn--open-form" data-form="saude">Adquira já</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Painel: Energia Solar -->
+    <section class="service-panel" id="panel-solar" data-service="solar" role="tabpanel" hidden>
+      <div class="service-panel__layout">
+        <img class="service-panel__image" src="imgs/img-energiasolar.png" alt="Energia solar — painéis fotovoltaicos">
+        <div class="service-panel__content">
+          <h3 class="service-panel__title">Energia Solar</h3>
+          <p class="service-panel__text">
+            Investir em energia solar é reduzir custos e contribuir com o futuro do planeta.
+            Com projetos personalizados e soluções eficientes, a Carneiro Seguros auxilia você a
+            economizar na conta de luz enquanto valoriza seu imóvel de forma sustentável.
+          </p>
+          <button type="button" class="btn btn--primary btn--open-form" data-form="solar">Adquira já</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Formulários (overlay — exibidos ao clicar em "Adquira já") -->
+  <div class="quote-forms" id="quoteForms" aria-hidden="true">
+
+    <!-- Formulário: Seguro Auto -->
+    <section class="quote-form" id="form-auto" data-service="auto">
+      <div class="quote-form__bg" aria-hidden="true"></div>
+      <div class="quote-form__overlay"></div>
+      <div class="container quote-form__inner">
+        <div class="quote-form__topbar">
+          <button type="button" class="quote-form__back" aria-label="Voltar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <img src="imgs/logo.png" alt="" class="quote-form__logo" width="48" height="48" aria-hidden="true">
+        </div>
+        <h2 class="quote-form__title">Nos conte mais sobre você</h2>
+        <form class="quote-form__form" id="formAuto" data-product="auto" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="auto-cpf">CPF</label>
+              <input type="text" id="auto-cpf" name="cpf" placeholder="000.000.000-00" required>
+            </div>
+            <div class="form-group">
+              <label for="auto-placa">Placa e chassi do veículo</label>
+              <input type="text" id="auto-placa" name="placa_chassi" placeholder="ABC1D23 / chassi" required>
+            </div>
+            <div class="form-group">
+              <label for="auto-modelo">Modelo do carro</label>
+              <input type="text" id="auto-modelo" name="modelo" placeholder="Ex: Honda Civic 2022" required>
+            </div>
+            <div class="form-group">
+              <label for="auto-estado-civil">Estado civil</label>
+              <select id="auto-estado-civil" name="estado_civil" required>
+                <option value="">Selecione</option>
+                <option value="Casado(a)">Casado(a)</option>
+                <option value="Solteiro(a)">Solteiro(a)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="auto-cep">CEP da garagem</label>
+              <input type="text" id="auto-cep" name="cep" placeholder="00000-000" required>
+            </div>
+            <div class="form-group">
+              <label for="auto-uso">Uso do veículo</label>
+              <select id="auto-uso" name="uso" required>
+                <option value="">Selecione</option>
+                <option value="Particular">Particular</option>
+                <option value="Trabalho">Trabalho</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="auto-garagem">Garagem coberta ou na rua?</label>
+              <select id="auto-garagem" name="garagem" required>
+                <option value="">Selecione</option>
+                <option value="Garagem coberta">Garagem coberta</option>
+                <option value="Na rua">Na rua</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="auto-telefone">Telefone de retorno para contato</label>
+              <input type="tel" id="auto-telefone" name="telefone" placeholder="(81) 99999-9999" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--submit">Envie mensagem</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Formulário: Consórcios -->
+    <section class="quote-form" id="form-consorcio" data-service="consorcio">
+      <div class="quote-form__bg" aria-hidden="true"></div>
+      <div class="quote-form__overlay"></div>
+      <div class="container quote-form__inner">
+        <div class="quote-form__topbar">
+          <button type="button" class="quote-form__back" aria-label="Voltar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <img src="imgs/logo.png" alt="" class="quote-form__logo" width="48" height="48" aria-hidden="true">
+        </div>
+        <h2 class="quote-form__title">Nos conte mais sobre você</h2>
+        <form class="quote-form__form" id="formConsorcio" data-product="consorcio" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="cons-tipo">Tipo</label>
+              <select id="cons-tipo" name="tipo" required>
+                <option value="">Selecione</option>
+                <option value="Automóvel">Automóvel</option>
+                <option value="Imóvel">Imóvel</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="cons-valor">Valor do bem desejado</label>
+              <input type="text" id="cons-valor" name="valor" placeholder="R$ 0,00" required>
+            </div>
+            <div class="form-group">
+              <label for="cons-prazo">Prazo estimado</label>
+              <input type="text" id="cons-prazo" name="prazo" placeholder="Ex: 60 meses" required>
+            </div>
+            <div class="form-group">
+              <label for="cons-nome">Nome completo</label>
+              <input type="text" id="cons-nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+            <div class="form-group form-group--full">
+              <label for="cons-telefone">Telefone de retorno para contato</label>
+              <input type="tel" id="cons-telefone" name="telefone" placeholder="(81) 99999-9999" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--submit">Envie mensagem</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Formulário: Plano de Saúde -->
+    <section class="quote-form" id="form-saude" data-service="saude">
+      <div class="quote-form__bg" aria-hidden="true"></div>
+      <div class="quote-form__overlay"></div>
+      <div class="container quote-form__inner">
+        <div class="quote-form__topbar">
+          <button type="button" class="quote-form__back" aria-label="Voltar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <img src="imgs/logo.png" alt="" class="quote-form__logo" width="48" height="48" aria-hidden="true">
+        </div>
+        <h2 class="quote-form__title">Nos conte mais sobre você</h2>
+        <form class="quote-form__form" id="formSaude" data-product="saude" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="saude-nome">Nome completo</label>
+              <input type="text" id="saude-nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+            <div class="form-group">
+              <label for="saude-cidade">Cidade</label>
+              <input type="text" id="saude-cidade" name="cidade" placeholder="Sua cidade" required>
+            </div>
+            <div class="form-group">
+              <label for="saude-beneficiarios">Número de beneficiários</label>
+              <input type="number" id="saude-beneficiarios" name="beneficiarios" placeholder="Ex: 3" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="saude-faixa">Faixa etária dos beneficiários</label>
+              <input type="text" id="saude-faixa" name="faixa_etaria" placeholder="Ex: 30, 28, 5 anos" required>
+            </div>
+            <div class="form-group form-group--full">
+              <label for="saude-telefone">Telefone de retorno para contato</label>
+              <input type="tel" id="saude-telefone" name="telefone" placeholder="(81) 99999-9999" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--submit">Envie mensagem</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Formulário: Energia Solar -->
+    <section class="quote-form" id="form-solar" data-service="solar">
+      <div class="quote-form__bg" aria-hidden="true"></div>
+      <div class="quote-form__overlay"></div>
+      <div class="container quote-form__inner">
+        <div class="quote-form__topbar">
+          <button type="button" class="quote-form__back" aria-label="Voltar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <img src="imgs/logo.png" alt="" class="quote-form__logo" width="48" height="48" aria-hidden="true">
+        </div>
+        <h2 class="quote-form__title">Nos conte mais sobre você</h2>
+        <form class="quote-form__form" id="formSolar" data-product="solar" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="solar-cidade">Cidade</label>
+              <input type="text" id="solar-cidade" name="cidade" placeholder="Sua cidade" required>
+            </div>
+            <div class="form-group">
+              <label for="solar-tipo">Tipo de imóvel</label>
+              <select id="solar-tipo" name="tipo_imovel" required>
+                <option value="">Selecione</option>
+                <option value="Residencial">Residencial</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Rural">Rural</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="solar-conta">Valor médio da conta de luz</label>
+              <input type="text" id="solar-conta" name="conta_luz" placeholder="R$ 0,00" required>
+            </div>
+            <div class="form-group">
+              <label for="solar-nome">Nome completo</label>
+              <input type="text" id="solar-nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+            <div class="form-group form-group--full">
+              <label for="solar-telefone">Telefone de retorno para contato</label>
+              <input type="tel" id="solar-telefone" name="telefone" placeholder="(81) 99999-9999" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--submit">Envie mensagem</button>
+        </form>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" id="contato">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img src="imgs/logo.png" alt="Logo Carneiro Seguros" width="56" height="56">
+        <p>Há 15 anos protegendo você e sua família.</p>
+      </div>
+      <div class="footer__contact">
+        <h3>Contato</h3>
+        <ul>
+          <li><a href="tel:+558194307502">+55 81 9430-7502 — Escritório Bonito PE</a></li>
+          <li><a href="tel:+558195673348">+55 81 9567-3348 — Escritório Catende PE</a></li>
+          <li><a href="tel:+558196581999">+55 81 9658-1999 — Escritório Caruaru PE</a></li>
+        </ul>
+      </div>
+      <div class="footer__social">
+        <h3>Redes</h3>
+        <ul>
+          <li>
+            <a href="https://www.instagram.com/carneirocorretoradeseg" target="_blank" rel="noopener noreferrer">
+              Instagram: @carneirocorretoradeseg
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/5581996581999" target="_blank" rel="noopener noreferrer">
+              WhatsApp: +55 (81) 9 9658-1999
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; Carneiro Seguros — Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+  <!-- Botão de emergência (clientes segurados) -->
+  <a href="tel:+558196581999" class="emergency-btn" aria-label="Ligar para emergência — clientes segurados">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.56.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.25 1.01l-2.2 2.22z" fill="currentColor"/>
+    </svg>
+    <span>Emergência</span>
+  </a>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
