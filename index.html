@@ -27,6 +27,7 @@
         <ul class="header__menu">
           <li><a href="#inicio" class="header__link">Início</a></li>
           <li><a href="#beneficios" class="header__link">Benefícios</a></li>
+          <li><a href="#depoimentos" class="header__link">Depoimentos</a></li>
           <li><a href="#contato" class="header__link">Contato</a></li>
         </ul>
       </nav>
@@ -186,6 +187,31 @@
         </div>
       </div>
     </section>
+
+    <!-- Depoimentos -->
+    <section class="testimonials" id="depoimentos">
+      <div class="container">
+        <h2 class="testimonials__title">O que nossos clientes dizem</h2>
+        <p class="testimonials__subtitle">Experiências reais de quem confia na Carneiro Seguros</p>
+        <div class="testimonials__grid">
+          <article class="testimonial-card">
+            <img class="testimonial-card__avatar" src="imgs/img-depo1.jpeg" alt="">
+            <blockquote class="testimonial-card__message">"Meu carro deu perca total em acidente e fui indenizado em curto prazo"</blockquote>
+            <cite class="testimonial-card__author">João</cite>
+          </article>
+          <article class="testimonial-card">
+            <img class="testimonial-card__avatar" src="imgs/logo.png" alt="">
+            <blockquote class="testimonial-card__message">"Tive uma colisão com 3 carros e meu carro voltou zerado em pouco tempo. Tudo graças à Carneiro Seguros"</blockquote>
+            <cite class="testimonial-card__author">Antônio</cite>
+          </article>
+          <article class="testimonial-card">
+            <img class="testimonial-card__avatar" src="imgs/logo.png" alt="">
+            <blockquote class="testimonial-card__message">"O seguro de vida me garantiu o capital segurado do diagnóstico de doenças graves e pude ser indenizada do tratamento de CA"</blockquote>
+            <cite class="testimonial-card__author">Maria</cite>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Formulários -->
@@ -234,16 +260,16 @@
                 <option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option>
               </select>
             </div>
-            <div class="form-group"><label for="auto-dono">O segurado é o dono do veículo?</label>
+            <div class="form-group"><label for="auto-dono">O segurado é o proprietário do veículo?</label>
               <select id="auto-dono" name="dono_veiculo" required>
                 <option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option>
               </select>
             </div>
             <div class="form-group is-conditional" data-show-when="auto-dono" data-show-value="Não" hidden>
-              <label for="auto-dono-cpf">CPF do dono do veículo</label><input type="text" id="auto-dono-cpf" name="dono_cpf" placeholder="000.000.000-00">
+              <label for="auto-dono-cpf">CPF do proprietário do veículo</label><input type="text" id="auto-dono-cpf" name="dono_cpf" placeholder="000.000.000-00">
             </div>
             <div class="form-group is-conditional" data-show-when="auto-dono" data-show-value="Não" hidden>
-              <label for="auto-dono-nasc">Data de nascimento do dono</label><input type="date" id="auto-dono-nasc" name="dono_nascimento">
+              <label for="auto-dono-nasc">Data de nascimento do proprietário</label><input type="date" id="auto-dono-nasc" name="dono_nascimento">
             </div>
             <div class="form-group"><label for="auto-cobertura-jovem">Deseja cobertura de 18 a 26 anos?</label>
               <select id="auto-cobertura-jovem" name="cobertura_jovem" required>
@@ -296,12 +322,23 @@
         </div>
         <h2 class="quote-form__title">Cotação — Plano de Saúde</h2>
         <form class="quote-form__form" data-product="saude" novalidate>
-          <div class="form-grid">
-            <div class="form-group"><label for="saude-nome">Nome completo</label><input type="text" id="saude-nome" name="nome" required></div>
-            <div class="form-group"><label for="saude-cidade">Cidade</label><input type="text" id="saude-cidade" name="cidade" required></div>
-            <div class="form-group"><label for="saude-beneficiarios">Número de beneficiários</label><input type="number" id="saude-beneficiarios" name="beneficiarios" min="1" required></div>
-            <div class="form-group"><label for="saude-faixa">Faixa etária dos beneficiários</label><input type="text" id="saude-faixa" name="faixa_etaria" placeholder="Ex: 30, 28, 5 anos" required></div>
-            <div class="form-group form-group--full"><label for="saude-telefone">Telefone de retorno</label><input type="tel" id="saude-telefone" name="telefone" required></div>
+          <div class="form-toggle" role="group" aria-label="Tipo de contratação">
+            <button type="button" class="form-toggle__btn is-active" data-toggle="pf">Pessoa Física</button>
+            <button type="button" class="form-toggle__btn" data-toggle="pj">Pessoa Jurídica</button>
+          </div>
+          <input type="hidden" name="tipo_pessoa" id="saude-tipo-pessoa" value="pf">
+          <div class="form-grid form-panel" id="saude-pf" role="tabpanel" aria-label="Pessoa Física">
+            <div class="form-group"><label for="saude-pf-nome">Nome completo</label><input type="text" id="saude-pf-nome" name="pf_nome"></div>
+            <div class="form-group"><label for="saude-pf-cidade">Cidade</label><input type="text" id="saude-pf-cidade" name="pf_cidade"></div>
+            <div class="form-group"><label for="saude-pf-beneficiarios">Número de beneficiários</label><input type="number" id="saude-pf-beneficiarios" name="pf_beneficiarios" min="1"></div>
+            <div class="form-group"><label for="saude-pf-faixa">Faixa etária dos beneficiários</label><input type="text" id="saude-pf-faixa" name="pf_faixa_etaria" placeholder="Ex: 30, 28, 5 anos"></div>
+            <div class="form-group form-group--full"><label for="saude-pf-telefone">Telefone de retorno</label><input type="tel" id="saude-pf-telefone" name="pf_telefone" placeholder="(81) 99999-9999"></div>
+          </div>
+          <div class="form-grid form-panel" id="saude-pj" role="tabpanel" aria-label="Pessoa Jurídica" hidden>
+            <div class="form-group"><label for="saude-pj-cnpj">CNPJ</label><input type="text" id="saude-pj-cnpj" name="pj_cnpj" placeholder="00.000.000/0000-00"></div>
+            <div class="form-group"><label for="saude-pj-nome">Nome do cliente</label><input type="text" id="saude-pj-nome" name="pj_nome"></div>
+            <div class="form-group"><label for="saude-pj-vidas">Quantidade de vidas para o plano</label><input type="number" id="saude-pj-vidas" name="pj_vidas" min="1"></div>
+            <div class="form-group form-group--full"><label for="saude-pj-telefone">Telefone de retorno</label><input type="tel" id="saude-pj-telefone" name="pj_telefone" placeholder="(81) 99999-9999"></div>
           </div>
           <button type="submit" class="btn btn--submit">Envie mensagem</button>
         </form>
@@ -368,20 +405,16 @@
             <button type="button" class="form-toggle__btn" data-toggle="pj">Pessoa Jurídica</button>
           </div>
           <input type="hidden" name="tipo_pessoa" id="odonto-tipo-pessoa" value="pf">
-          <div class="form-grid" id="odonto-pf">
-            <div class="form-group"><label for="odonto-pf-nome">Nome completo</label><input type="text" id="odonto-pf-nome" name="pf_nome"></div>
-            <div class="form-group"><label for="odonto-pf-nasc">Data de nascimento</label><input type="date" id="odonto-pf-nasc" name="pf_nascimento"></div>
+          <div class="form-grid form-panel" id="odonto-pf" role="tabpanel" aria-label="Pessoa Física">
             <div class="form-group"><label for="odonto-pf-cpf">CPF</label><input type="text" id="odonto-pf-cpf" name="pf_cpf" placeholder="000.000.000-00"></div>
-            <div class="form-group"><label for="odonto-pf-cidade">Cidade</label><input type="text" id="odonto-pf-cidade" name="pf_cidade"></div>
+            <div class="form-group"><label for="odonto-pf-nome">Nome e Sobrenome</label><input type="text" id="odonto-pf-nome" name="pf_nome"></div>
+            <div class="form-group form-group--full"><label for="odonto-pf-telefone">Telefone de contato</label><input type="tel" id="odonto-pf-telefone" name="pf_telefone" placeholder="(81) 99999-9999"></div>
           </div>
-          <div class="form-grid" id="odonto-pj" hidden>
-            <div class="form-group"><label for="odonto-pj-empresa">Nome da empresa</label><input type="text" id="odonto-pj-empresa" name="pj_empresa"></div>
+          <div class="form-grid form-panel" id="odonto-pj" role="tabpanel" aria-label="Pessoa Jurídica" hidden>
             <div class="form-group"><label for="odonto-pj-cnpj">CNPJ</label><input type="text" id="odonto-pj-cnpj" name="pj_cnpj" placeholder="00.000.000/0000-00"></div>
-            <div class="form-group form-group--full"><label for="odonto-pj-pessoas">Nome das pessoas</label><input type="text" id="odonto-pj-pessoas" name="pj_pessoas" placeholder="Separe por vírgula"></div>
-            <div class="form-group"><label for="odonto-pj-email">E-mail</label><input type="email" id="odonto-pj-email" name="pj_email"></div>
-            <div class="form-group"><label for="odonto-pj-telefone">Telefone para contato</label><input type="tel" id="odonto-pj-telefone" name="pj_telefone"></div>
-            <div class="form-group"><label for="odonto-pj-cep">CEP</label><input type="text" id="odonto-pj-cep" name="pj_cep" placeholder="00000-000"></div>
-            <div class="form-group"><label for="odonto-pj-cidade">Cidade</label><input type="text" id="odonto-pj-cidade" name="pj_cidade"></div>
+            <div class="form-group"><label for="odonto-pj-cliente">Nome do cliente</label><input type="text" id="odonto-pj-cliente" name="pj_cliente"></div>
+            <div class="form-group"><label for="odonto-pj-vidas">Quantidade de vidas para o plano</label><input type="number" id="odonto-pj-vidas" name="pj_vidas" min="1"></div>
+            <div class="form-group form-group--full"><label for="odonto-pj-telefone">Telefone de contato</label><input type="tel" id="odonto-pj-telefone" name="pj_telefone" placeholder="(81) 99999-9999"></div>
           </div>
           <button type="submit" class="btn btn--submit">Envie mensagem</button>
         </form>
@@ -399,17 +432,21 @@
         <h2 class="quote-form__title">Cotação — Previdência Privada</h2>
         <form class="quote-form__form" data-product="previdencia" novalidate>
           <div class="form-grid">
-            <div class="form-group"><label for="prev-nome">Nome completo</label><input type="text" id="prev-nome" name="nome" required></div>
-            <div class="form-group"><label for="prev-cpf">CPF</label><input type="text" id="prev-cpf" name="cpf" required></div>
-            <div class="form-group"><label for="prev-rg">RG</label><input type="text" id="prev-rg" name="rg" required></div>
+            <div class="form-group"><label for="prev-cpf">CPF</label><input type="text" id="prev-cpf" name="cpf" placeholder="000.000.000-00" required></div>
             <div class="form-group"><label for="prev-nasc">Data de nascimento</label><input type="date" id="prev-nasc" name="nascimento" required></div>
-            <div class="form-group form-group--full"><label for="prev-endereco">Endereço</label><input type="text" id="prev-endereco" name="endereco" required></div>
-            <div class="form-group"><label for="prev-email">E-mail</label><input type="email" id="prev-email" name="email" required></div>
-            <div class="form-group"><label for="prev-telefone">Telefone</label><input type="tel" id="prev-telefone" name="telefone" required></div>
-            <div class="form-group"><label for="prev-cidade">Cidade</label><input type="text" id="prev-cidade" name="cidade" required></div>
-            <div class="form-group"><label for="prev-profissao">Profissão e renda</label><input type="text" id="prev-profissao" name="profissao_renda" placeholder="Ex: Engenheiro — R$ 8.000/mês" required></div>
-            <div class="form-group"><label for="prev-tipo">Tipo</label><select id="prev-tipo" name="tipo_previdencia" required><option value="">Selecione</option><option value="PGBL">PGBL</option><option value="VGBL">VGBL</option></select></div>
-            <div class="form-group"><label for="prev-imposto">Imposto</label><select id="prev-imposto" name="imposto" required><option value="">Selecione</option><option value="Regressivo">Regressivo</option><option value="Progressivo mensal">Progressivo mensal</option></select></div>
+            <div class="form-group form-group--full"><label for="prev-nome">Nome</label><input type="text" id="prev-nome" name="nome" required></div>
+            <div class="form-group form-group--full"><label for="prev-telefone">Telefone</label><input type="tel" id="prev-telefone" name="telefone" placeholder="(81) 99999-9999" required></div>
+            <fieldset class="form-group form-group--full form-radio-group">
+              <legend>Modalidade</legend>
+              <label class="form-radio">
+                <input type="radio" name="modalidade" value="Simplificada" required>
+                <span>Modalidade simplificada</span>
+              </label>
+              <label class="form-radio">
+                <input type="radio" name="modalidade" value="Completa" required>
+                <span>Modalidade completa</span>
+              </label>
+            </fieldset>
           </div>
           <button type="submit" class="btn btn--submit">Envie mensagem</button>
         </form>

@@ -186,47 +186,57 @@
   initConditionalFields();
 
   // =============================================
-  // Toggle PF / PJ — Odontológico
+  // Toggle PF / PJ — formulários com abas
   // =============================================
-  let odontoToggleInitialized = false;
+  function setFormTipo(formId, tipoInputId, pfSectionId, pjSectionId, tipo) {
+    const tipoInput = document.getElementById(tipoInputId);
+    const pfSection = document.getElementById(pfSectionId);
+    const pjSection = document.getElementById(pjSectionId);
+    const toggleBtns = document.querySelectorAll('#' + formId + ' .form-toggle__btn');
 
-  function setOdontoTipo(tipo) {
-    const tipoInput = document.getElementById('odonto-tipo-pessoa');
-    const pfSection = document.getElementById('odonto-pf');
-    const pjSection = document.getElementById('odonto-pj');
-    const toggleBtns = document.querySelectorAll('#form-odonto .form-toggle__btn');
+    if (!tipoInput || !pfSection || !pjSection) return;
 
     tipoInput.value = tipo;
     toggleBtns.forEach(function (btn) {
-      btn.classList.toggle('is-active', btn.dataset.toggle === tipo);
+      const active = btn.dataset.toggle === tipo;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', active);
     });
+
     pfSection.hidden = tipo !== 'pf';
+    pfSection.setAttribute('aria-hidden', tipo !== 'pf');
     pjSection.hidden = tipo !== 'pj';
-    pfSection.querySelectorAll('input').forEach(function (f) {
+    pjSection.setAttribute('aria-hidden', tipo !== 'pj');
+
+    pfSection.querySelectorAll('input, select, textarea').forEach(function (f) {
       f.required = tipo === 'pf';
       if (tipo !== 'pf') { f.value = ''; f.classList.remove('is-invalid'); }
     });
-    pjSection.querySelectorAll('input').forEach(function (f) {
+    pjSection.querySelectorAll('input, select, textarea').forEach(function (f) {
       f.required = tipo === 'pj';
       if (tipo !== 'pj') { f.value = ''; f.classList.remove('is-invalid'); }
     });
   }
 
-  function initOdontoToggle() {
-    if (odontoToggleInitialized) {
-      setOdontoTipo('pf');
-      return;
-    }
-    const toggleBtns = document.querySelectorAll('#form-odonto .form-toggle__btn');
-    if (!toggleBtns.length) return;
+  function initFormToggle(formId, tipoInputId, pfSectionId, pjSectionId) {
+    const toggleBtns = document.querySelectorAll('#' + formId + ' .form-toggle__btn');
+    if (!toggleBtns.length) return function () {};
+
     toggleBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () { setOdontoTipo(btn.dataset.toggle); });
+      btn.addEventListener('click', function () {
+        setFormTipo(formId, tipoInputId, pfSectionId, pjSectionId, btn.dataset.toggle);
+      });
     });
-    odontoToggleInitialized = true;
-    setOdontoTipo('pf');
+
+    setFormTipo(formId, tipoInputId, pfSectionId, pjSectionId, 'pf');
+
+    return function resetToPf() {
+      setFormTipo(formId, tipoInputId, pfSectionId, pjSectionId, 'pf');
+    };
   }
 
-  initOdontoToggle();
+  const resetOdontoTipo = initFormToggle('form-odonto', 'odonto-tipo-pessoa', 'odonto-pf', 'odonto-pj');
+  const resetSaudeTipo = initFormToggle('form-saude', 'saude-tipo-pessoa', 'saude-pf', 'saude-pj');
 
   // =============================================
   // Rodízio de WhatsApp por cidade
@@ -285,12 +295,12 @@
 
       lines.push(
         '• Principal condutor: ' + d.principal_condutor,
-        '• Dono do veículo: ' + d.dono_veiculo
+        '• Proprietário do veículo: ' + d.dono_veiculo
       );
 
       if (d.dono_veiculo === 'Não') {
-        lines.push('• CPF do dono: ' + d.dono_cpf);
-        lines.push('• Nascimento do dono: ' + d.dono_nascimento);
+        lines.push('• CPF do proprietário: ' + d.dono_cpf);
+        lines.push('• Nascimento do proprietário: ' + d.dono_nascimento);
       }
 
       lines.push('• Cobertura 18-26 anos: ' + d.cobertura_jovem);
@@ -320,16 +330,31 @@
     },
 
     saude: function (d) {
+      if (d.tipo_pessoa === 'pj') {
+        return [
+          '*Cotação — Plano de Saúde (PJ)*',
+          '',
+          'Olá, equipe Carneiro Seguros! Gostaria de uma cotação de plano de saúde empresarial.',
+          '',
+          '• CNPJ: ' + d.pj_cnpj,
+          '• Nome do cliente: ' + d.pj_nome,
+          '• Quantidade de vidas: ' + d.pj_vidas,
+          '• Telefone: ' + d.pj_telefone,
+          '',
+          'Aguardo retorno. Obrigado!'
+        ].join('\n');
+      }
+
       return [
-        '*Cotação — Plano de Saúde*',
+        '*Cotação — Plano de Saúde (PF)*',
         '',
         'Olá, equipe Carneiro Seguros! Gostaria de uma cotação de plano de saúde.',
         '',
-        '• Nome: ' + d.nome,
-        '• Cidade: ' + d.cidade,
-        '• Telefone: ' + d.telefone,
-        '• Beneficiários: ' + d.beneficiarios,
-        '• Faixa etária: ' + d.faixa_etaria,
+        '• Nome: ' + d.pf_nome,
+        '• Cidade: ' + d.pf_cidade,
+        '• Telefone: ' + d.pf_telefone,
+        '• Beneficiários: ' + d.pf_beneficiarios,
+        '• Faixa etária: ' + d.pf_faixa_etaria,
         '',
         'Aguardo retorno. Obrigado!'
       ].join('\n');
@@ -377,13 +402,10 @@
           '',
           'Olá, equipe Carneiro Seguros! Tenho interesse em plano odontológico empresarial.',
           '',
-          '• Empresa: ' + d.pj_empresa,
           '• CNPJ: ' + d.pj_cnpj,
-          '• Pessoas: ' + d.pj_pessoas,
-          '• E-mail: ' + d.pj_email,
+          '• Nome do cliente: ' + d.pj_cliente,
+          '• Quantidade de vidas: ' + d.pj_vidas,
           '• Telefone: ' + d.pj_telefone,
-          '• CEP: ' + d.pj_cep,
-          '• Cidade: ' + d.pj_cidade,
           '',
           'Aguardo retorno. Obrigado!'
         ].join('\n');
@@ -394,10 +416,9 @@
         '',
         'Olá, equipe Carneiro Seguros! Tenho interesse em plano odontológico.',
         '',
-        '• Nome: ' + d.pf_nome,
         '• CPF: ' + d.pf_cpf,
-        '• Nascimento: ' + d.pf_nascimento,
-        '• Cidade: ' + d.pf_cidade,
+        '• Nome: ' + d.pf_nome,
+        '• Telefone: ' + d.pf_telefone,
         '',
         'Aguardo retorno. Obrigado!'
       ].join('\n');
@@ -409,17 +430,11 @@
         '',
         'Olá, equipe Carneiro Seguros! Tenho interesse em previdência privada.',
         '',
-        '• Nome: ' + d.nome,
         '• CPF: ' + d.cpf,
-        '• RG: ' + d.rg,
         '• Nascimento: ' + d.nascimento,
-        '• Endereço: ' + d.endereco,
-        '• Cidade: ' + d.cidade,
-        '• E-mail: ' + d.email,
+        '• Nome: ' + d.nome,
         '• Telefone: ' + d.telefone,
-        '• Profissão e renda: ' + d.profissao_renda,
-        '• Tipo: ' + d.tipo_previdencia,
-        '• Imposto: ' + d.imposto,
+        '• Modalidade: ' + d.modalidade,
         '',
         'Aguardo retorno. Obrigado!'
       ].join('\n');
@@ -433,6 +448,7 @@
     const data = {};
     form.querySelectorAll('input, select, textarea').forEach(function (el) {
       if (!el.name) return;
+      if (el.type === 'radio' && !el.checked) return;
       const group = el.closest('.is-conditional');
       if (group && group.hidden) return;
       const section = el.closest('[hidden]');
@@ -443,22 +459,43 @@
   }
 
   function getCityFromData(data) {
-    return data.cidade || data.pf_cidade || data.pj_cidade || '';
+    return data.pf_cidade || data.cidade || '';
   }
 
   function validateForm(form) {
     let valid = true;
+    const validatedRadioGroups = {};
+
     form.querySelectorAll('input, select, textarea').forEach(function (field) {
       field.classList.remove('is-invalid');
       const group = field.closest('.is-conditional');
       if (group && group.hidden) return;
       const section = field.closest('[hidden]');
       if (section) return;
+
+      if (field.type === 'radio') {
+        if (!field.required || validatedRadioGroups[field.name]) return;
+        validatedRadioGroups[field.name] = true;
+        const fieldset = field.closest('.form-radio-group');
+        if (!form.querySelector('input[name="' + field.name + '"]:checked')) {
+          if (fieldset) fieldset.classList.add('is-invalid');
+          valid = false;
+        }
+        return;
+      }
+
       if (field.required && !field.value.trim()) {
         field.classList.add('is-invalid');
         valid = false;
       }
     });
+
+    form.querySelectorAll('.form-radio-group.is-invalid').forEach(function (fieldset) {
+      if (form.querySelector('input[name="' + fieldset.querySelector('input').name + '"]:checked')) {
+        fieldset.classList.remove('is-invalid');
+      }
+    });
+
     return valid;
   }
 
@@ -495,7 +532,8 @@
         submitBtn.style.background = '';
         form.reset();
         updateAllConditionals();
-        setOdontoTipo('pf');
+        resetOdontoTipo();
+        resetSaudeTipo();
         closeForm();
       }, 2500);
     }, 600);
@@ -509,7 +547,7 @@
   // Animações on-scroll
   // =============================================
   function initScrollAnimations() {
-    const targets = document.querySelectorAll('.service-panel__content, .quote-form__inner, .footer__grid');
+    const targets = document.querySelectorAll('.service-panel__content, .quote-form__inner, .footer__grid, .testimonial-card');
     if (!('IntersectionObserver' in window)) return;
 
     const observer = new IntersectionObserver(function (entries) {
