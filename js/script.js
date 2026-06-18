@@ -186,6 +186,46 @@
   initConditionalFields();
 
   // =============================================
+  // Máscaras de entrada — CPF, Telefone, CNPJ/CPF dinâmico
+  // =============================================
+  function maskCpf(value) {
+    return value.replace(/\D/g, '').slice(0, 11)
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  }
+
+  function maskPhone(value) {
+    var v = value.replace(/\D/g, '').slice(0, 11);
+    if (v.length <= 10) {
+      return v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3').replace(/-$/, '');
+    }
+    return v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3').replace(/-$/, '');
+  }
+
+  function applyMask(input, maskFn) {
+    input.addEventListener('input', function () {
+      var pos = input.selectionStart;
+      var rawLen = input.value.length;
+      input.value = maskFn(input.value);
+      var diff = input.value.length - rawLen;
+      input.setSelectionRange(pos + diff, pos + diff);
+    });
+  }
+
+  function initMasks() {
+    document.querySelectorAll('[placeholder="000.000.000-00"]').forEach(function (el) {
+      applyMask(el, maskCpf);
+    });
+    document.querySelectorAll('[placeholder="(81) 99999-9999"]').forEach(function (el) {
+      applyMask(el, maskPhone);
+    });
+  }
+
+  initMasks();
+
+
+  // =============================================
   // Toggle PF / PJ — formulários com abas
   // =============================================
   function setFormTipo(formId, tipoInputId, pfSectionId, pjSectionId, tipo) {
@@ -435,6 +475,67 @@
         '• Nome: ' + d.nome,
         '• Telefone: ' + d.telefone,
         '• Modalidade: ' + d.modalidade,
+        '',
+        'Aguardo retorno. Obrigado!'
+      ].join('\n');
+    },
+
+    cyber: function (d) {
+      return [
+        '*Cotação — Seguro Cyber*',
+        '',
+        'Olá, equipe Carneiro Seguros! Tenho interesse em seguro cyber.',
+        '',
+        '• Nome: ' + d.nome,
+        '• CPF: ' + d.cpf,
+        '• Telefone: ' + d.telefone,
+        '',
+        'Aguardo retorno. Obrigado!'
+      ].join('\n');
+    },
+
+    viagem: function (d) {
+      return [
+        '*Cotação — Seguro Viagem*',
+        '',
+        'Olá, equipe Carneiro Seguros! Gostaria de uma cotação de seguro viagem.',
+        '',
+        '• Nome: ' + d.nome,
+        '• CPF: ' + d.cpf,
+        '• Nascimento: ' + d.nascimento,
+        '• Estado de origem: ' + d.estado_origem,
+        '• Destino: ' + d.destino,
+        '• Data de saída: ' + d.data_saida,
+        '• Data de volta: ' + d.data_volta,
+        '',
+        'Aguardo retorno. Obrigado!'
+      ].join('\n');
+    },
+
+    rcmedico: function (d) {
+      return [
+        '*Cotação — RC Médico (Responsabilidade Civil Profissional)*',
+        '',
+        'Olá, equipe Carneiro Seguros! Tenho interesse em RC Médico.',
+        '',
+        '• Nome: ' + d.nome,
+        '• CPF: ' + d.cpf,
+        '• CRM: ' + d.crm,
+        '• Telefone: ' + d.telefone,
+        '',
+        'Aguardo retorno. Obrigado!'
+      ].join('\n');
+    },
+
+    carga: function (d) {
+      return [
+        '*Cotação — Transporte de Cargas*',
+        '',
+        'Olá, equipe Carneiro Seguros! Tenho interesse em seguro de transporte de cargas.',
+        '',
+        '• Nome: ' + d.nome,
+        '• CPF: ' + d.cpf,
+        '• Telefone: ' + d.telefone,
         '',
         'Aguardo retorno. Obrigado!'
       ].join('\n');
