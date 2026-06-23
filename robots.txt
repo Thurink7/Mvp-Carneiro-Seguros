@@ -1,0 +1,10 @@
+# Carneiro Seguros — robots.txt
+# Atualize a URL do Sitemap se o domínio de produção for diferente.
+
+User-agent: *
+Allow: /
+
+# Bloqueia apenas pastas sem conteúdo indexável
+Disallow: /Modelo UI/
+
+Sitemap: https://carneirosegurosbrasil.com.br/sitemap.xml
